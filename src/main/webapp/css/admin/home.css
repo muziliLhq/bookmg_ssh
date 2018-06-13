@@ -1,0 +1,41 @@
+html, body, h1 {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+}
+
+.form-control {
+	margin-bottom: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.menu-contrl {
+	margin-bottom: 10px;
+}
+
+.north_ul {
+	list-style: none;
+	float: right;
+}
+
+.north_ul>li {
+	float: left;
+	margin-right: 10px;
+}
+
+.bodycls {
+	color: purple;
+	background: #FFE48D;
+}
+
+#systime {
+	display: inline-block; /* 行级块元素：不独占一行，具备块元素的其它特征 */
+	float: right;
+}

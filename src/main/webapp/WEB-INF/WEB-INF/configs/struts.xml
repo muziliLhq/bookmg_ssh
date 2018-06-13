@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <!-- 配置常量：开发模式，启动 -->
+    <constant name="struts.devMode" value="true"/>
+
+    <!--  动态方法调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+
+    <!-- 由spring接管struts创建Action -->
+    <constant name="struts.objectFactory" value="spring"/>
+
+    <!-- 分类管理映射 -->
+    <package name="common" extends="struts-default" namespace="/">
+        <!-- 关键地方  struts2.5 为了提升安全性，添加了 allomethod 这么个玩意-->
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="*" class="bmsAction" method="{1}">
+            <result name="home">/WEB-INF/jsps/home.jsp</result>
+            <result name="userList">/WEB-INF/jsps/userList.jsp</result>
+            <result name="bookList">/WEB-INF/jsps/bookList.jsp</result>
+            <result name="rentBook">/WEB-INF/jsps/rentBook.jsp</result>
+            <result name="returnBook">/WEB-INF/jsps/returnBook.jsp</result>
+        </action>
+    </package>
+
+    <!-- 分类管理映射 -->
+    <package name="user" extends="struts-default,json-default" namespace="/user">
+        <!-- 关键地方  struts2.5 为了提升安全性，添加了 allomethod 这么个玩意-->
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+
+        <action name="*" class="userAction" method="{1}">
+            <result type="redirectAction">
+                <param name="actionName">home</param>
+                <param name="namespace">/</param>
+            </result>
+            <result name="invalid">/login.jsp</result>
+            <result name="json" type="json">
+                <param name="root">userJson</param>
+            </result>
+            <result name="add">/WEB-INF/jsps/addUser.jsp</result>
+            <result name="update">/WEB-INF/jsps/updateUser.jsp</result>
+            <result name="look">/WEB-INF/jsps/lookUser.jsp</result>
+        </action>
+    </package>
+
+</struts>
